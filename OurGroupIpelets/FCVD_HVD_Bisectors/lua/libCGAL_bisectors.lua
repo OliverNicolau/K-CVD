@@ -29,6 +29,8 @@ methods = {
   { label="L2 NVD polygonal input" },
   { label="L2 SVD" },
   { label="L2 FSVD" },
+  { label="L2 FCVDstar" },
+  { label="L2 k-CVD" },  
   { label="Help" },
 }
 
