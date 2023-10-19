@@ -1,55 +1,67 @@
-# The Farthest Line-Segment Voronoi Diagram - UROP 2017
+# The order K Farthest Color Voronoi Diagram - 2023
 
-Summer internship (UROP: Undergraduate Research Opportunity Program) at
-[USI Lugano](http://inf.usi.ch): Implementation of Geometrical Algorithms -
-The Farthest Line-Segment Voronoi Diagram (supervised by Prof. Evanthia
-Papadopoulou, Ioannis Mantas, Martin Suderland).
-
+Doctoral studies at [USI Lugano](http://inf.usi.ch): Implementation of Geometrical Algorithms -
+The order K Farthest Color Voronoi Diagram (supervised by Prof.ssa Evanthia
+Papadopoulou).
 
 ## Description
 
-## Setup
+This are various ipelets to compute various kinds of Vornoi Diagrams.
+Most of them are developed from existing code bases (CGAL libraries and demos), expanding them in various ways (see forked repository).
 
-### Prerequisites
-### Installation
+This repository includes the work in progress on the higher order Color Vornoi Diagram, or k-CVD.
 
+## Prerequisites
 
+- CMake: version >= 3.12 (can work with older if aproppiate tweaks are made)
+- CGAL: version ~ 5.5.1-2 (sable release in debian 12, also available through macports. TODO test & update to new release)
+- IPE: version >= 7 (stable release in debian 12)
 
 --------------------------------------------------------------------------------
+
+## Installation
+
+### Download/clone this repository
+
+Use your favourite git tools, or download the zip version from this github page.
+
+### CMake + make
+
+Generate the makefile using CMake, and run make:
+
+```shell
+cd /path_to_repository/kCVD_FCVD_HVD_Bisectors
+cmake -DCMAKE_BUILD_TYPE="Release" .
+make
+```
+
+### Install ipelets
+
+Move the .so and .lua files into your IPE ipelets folder:
+
+```shell
+cp libCGAL_bisectors.so /Users/usi/ipe_macos/ipe-7.2.28/build/Ipe.app/Contents/Resources/ipelets/libCGAL_bisectors.so
+cp libCGAL_bisectors.lua /Users/usi/ipe_macos/ipe-7.2.28/build/Ipe.app/Contents/Resources/ipelets/libCGAL_bisectors.lua
+```
+
+--------------------------------------------------------------------------------
+
 ## Notes
 
-### Compilation
+If in an Macbook with a "Apple silicon" (M1, M2 and other arm64 architecture CPU), you might have needed to compile Ipe from source.
 
-To compile an own non-shipped program creating `executable` (adapt according to
-CGAL version):
+In any case that you need to use a local version of IPE, not installed with a package manager (apt, brew, macports...), you will need to specify the relevant paths to the IPE library.
+
+If in MacOS, you can use the following commands instead of the ones in the CMake section (the 'X' coorespond to your Ipe version) :
+
 ```shell
-cd /path/to/program
-cgal_create_CMakeLists -s executable
-cmake -DCGAL_DIR=$HOME/CGAL-4.9.1 .
+cd /path_to_repository/kCVD_FCVD_HVD_Bisectors
+cmake -DIPE_INCLUDE_DIR="/path/to/ipe-X.X.XX/src/include" -DIPE_LIBRARIES="/path/to/ipe-X.X.XX/build/Ipe.app/Contents/Frameworks/libipe.X.X.XX.dylib -DCMAKE_BUILD_TYPE="Release" ."
 make
 ```
 
-To compile an Ipelet copy the file `CMakeLists.txt` from
-`.../CGAL-X.X/demo/CGAL_Ipelets/CMakeLists.txt`, then after
-`set(CGAL_IPELETS ${CGAL_IPELETS})` delete the other Ipelets and add own. Don't
-forget to create a `lua/` folder where to put the `libCGAL_ipeletname.lua`
-files (as described on the
-[Ipelets manual](http://ipe.otfried.org/manual/cpp-ipelets.html)).
+If in a Linux system, set apropiately the IPE_INCLUDE_DIR and IPE_LIBRARIES variables.
 
-### CGAL
+- ```IPE_INCLUDE_DIR``` : should be the path to the directory containing ```ipebase.h```
 
-To see prerequisites: `brew info cgal`
-To install: `brew install cgal`
-Then download the source code from the official website (get the same version
-as in `brew`), extract it where you need it (for example your home directory),
-and:
-```shell
-cd CGAL-X.Y # e.g. CGAL-4.9.1
-cmake .
-make
-```
-
-### Ipe and Ipelets
-
-
-### C++
+- ```IPE_LIBRARIES``` : should be the path to the dynamic library file, usually ```libipe.X.X.XX.so``` (Linux) or ```libipe.X.X.XX.dylib``` (Macos)
