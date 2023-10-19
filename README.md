@@ -37,11 +37,11 @@ make
 
 ### Install ipelets
 
-Move the .so and .lua files into your IPE ipelets folder:
+Move the .so and .lua files into your IPE ipelets folder. An example for Mac computers:
 
 ```shell
-cp libCGAL_bisectors.so /Users/usi/ipe_macos/ipe-7.2.28/build/Ipe.app/Contents/Resources/ipelets/libCGAL_bisectors.so
-cp libCGAL_bisectors.lua /Users/usi/ipe_macos/ipe-7.2.28/build/Ipe.app/Contents/Resources/ipelets/libCGAL_bisectors.lua
+cp libCGAL_bisectors.so /path_to_ipe-X.X.XX/Ipe.app/Contents/Resources/ipelets/libCGAL_bisectors.so
+cp libCGAL_bisectors.lua /path_to_ipe-X.X.XX/Ipe.app/Contents/Resources/ipelets/libCGAL_bisectors.so
 ```
 
 --------------------------------------------------------------------------------
@@ -52,11 +52,11 @@ If in an Macbook with a "Apple silicon" (M1, M2 and other arm64 architecture CPU
 
 In any case that you need to use a local version of IPE, not installed with a package manager (apt, brew, macports...), you will need to specify the relevant paths to the IPE library.
 
-If in MacOS, you can use the following commands instead of the ones in the CMake section (the 'X' coorespond to your Ipe version) :
+If in MacOS, you can use the following commands instead of the ones in the CMake section:
 
 ```shell
 cd /path_to_repository/kCVD_FCVD_HVD_Bisectors
-cmake -DIPE_INCLUDE_DIR="/path/to/ipe-X.X.XX/src/include" -DIPE_LIBRARIES="/path/to/ipe-X.X.XX/build/Ipe.app/Contents/Frameworks/libipe.X.X.XX.dylib -DCMAKE_BUILD_TYPE="Release" ."
+cmake -DIPE_INCLUDE_DIR="/path_to_ipe-X.X.XX/src/include" -DIPE_LIBRARIES="/path_to_ipe-X.X.XX/build/Ipe.app/Contents/Frameworks/libipe.X.X.XX.dylib -DCMAKE_BUILD_TYPE="Release" ."
 make
 ```
 
@@ -65,3 +65,12 @@ If in a Linux system, set apropiately the IPE_INCLUDE_DIR and IPE_LIBRARIES vari
 - ```IPE_INCLUDE_DIR``` : should be the path to the directory containing ```ipebase.h```
 
 - ```IPE_LIBRARIES``` : should be the path to the dynamic library file, usually ```libipe.X.X.XX.so``` (Linux) or ```libipe.X.X.XX.dylib``` (Macos)
+
+
+--------------------------------------------------------------------------------
+
+## Ipelet instructions
+
+The k-CVD ipelet expects polygons as input (one per color), it then promts for the desired order k.
+
+TODO: allow for detection of IPE colors as input instead of polygons.
